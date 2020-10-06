@@ -1,5 +1,5 @@
 ESX                    = nil
-local SuccessLimit     = 0.09 -- Maxim 0.1 (high value, low success chances)
+local SuccessLimit     = 0.08 -- Maxim 0.1 (high value, low success chances)
 local AnimationSpeed   = 0.0015
 local ShowChatMSG      = true -- or false
 
@@ -164,8 +164,12 @@ Citizen.CreateThread(function()
 					StopAnimTask(GetPed(), 'amb@world_human_stand_fishing@idle_a','idle_c',2.0)
 					Citizen.Wait(200)
 					DeleteEntity(FishRod)
-
-					TriggerServerEvent('esx_fishing:caughtFish')
+					if math.random(100) == 1 then
+						if ShowChatMSG then ESX.ShowNotification("La ligne à cassée !") end
+						TriggerServerEvent('esx_fishing:removeInventoryItem', 'fishingrod', 1)
+					else
+						TriggerServerEvent('esx_fishing:caughtFish')
+					end
 
 				else
 					CFish = false
