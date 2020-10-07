@@ -166,10 +166,10 @@ Citizen.CreateThread(function()
 					DeleteEntity(FishRod)
 					if math.random(100) == 1 then
 						if ShowChatMSG then ESX.ShowNotification("La ligne à cassée !") end
+						TriggerServerEvent('esx_fishing:removeInventoryItem', 'fishingrod', 1)
 					else
 						TriggerServerEvent('esx_fishing:caughtFish')
 					end
-					TriggerServerEvent('esx_fishing:removeInventoryItem', 'fishingrod', 1)
 
 				else
 					CFish = false
